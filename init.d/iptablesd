@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# iptablesd      Start iptablesd firewall
+#
+# chkconfig: 2345 07 91
+# description:  Starts, stops and saves iptablesd firewall
+#
+### BEGIN INIT INFO
+# Provides: iptablesd
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start and stop iptablesd firewall
+# Description: Start, stop and save iptablesd firewall
+### END INIT INFO
+
+start() {
+	cat /etc/iptables.d/* | iptables-restore
+}
+stop() {
+	iptables -F
+}
+restart() {
+    stop
+    start
+}
+
+
+case "$1" in
+    start)
+        start
+        RETVAL=$?
+	echo 'iptablesd firewall started'
+        ;;
+    stop)
+        stop
+        RETVAL=$?
+	echo 'iptablesd firewall stopped'
+        ;;
+    restart|force-reload)
+        restart
+        RETVAL=$?
+	echo 'iptablesd firewall restarted'
+        ;;
+    status)
+        iptables -L -n
+        RETVAL=$?
+        ;;
+    *)
+        echo "Usage: ${0} {start|stop|restart|status}"
+        RETVAL=2
+        ;;
+esac
+
+exit $RETVAL
+
+
+
+cat * | iptables-restore

@@ -1,0 +1,3 @@
+-A INPUT -p tcp -m tcp --dport smtp -j ACCEPT
+-A INPUT -p tcp -m tcp --dport pop3 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport imap -j ACCEPT

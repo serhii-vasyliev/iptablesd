@@ -1,0 +1,7 @@
+*nat
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A POSTROUTING -s 172.16.0.0/12 -o eth0 -j SNAT --to 10.11.12.1
+-A PREROUTING -d 10.11.12.1 -p tcp -m tcp --dport 2222 -j DNAT --to-destination 172.16.1.1:22
+COMMIT

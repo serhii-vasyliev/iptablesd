@@ -1,0 +1,3 @@
+-A INPUT -p tcp -m tcp --dport http -j ACCEPT
+-A INPUT -p tcp -m tcp --dport https -j ACCEPT
+
